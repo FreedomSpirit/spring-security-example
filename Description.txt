@@ -1,0 +1,41 @@
+Volkov Alexandr test task description
+
+Test-task is a Maven project based on Spring-boot framework. Spring-boot uses annotations-based configuration, without xml configs.
+
+For some configuration (like DB configuration) used application.properties file in resources.
+It is possible to change it without project rebuilding.
+
+As DB used in memory H2. It is configured in application.properties, but it can be scipped as it is default Spring-boot values.
+
+For strength level used enum, that will be parsed as CSS class in UI, that used as visual indicator for password strength.
+
+Used standard Spring MVC layers: entity, dao(repository), service and controller.
+
+Added additional services for Security UserDetails, PasswordStrength.
+
+PasswordStrength is separate algorithm and not used any DAO.
+It has simple password check logic bases on counting regexpes with different symbols group.
+
+For storing passwords used BCrypt algorithm from Spring Security framework.
+It is used random seed (called salt) and hashing functions for encrypt. Salt stored in password string.
+Salt protects from Rainbow tables brute force data analyze and will make same password different for each user.
+
+To improve BCrypt I add static seed to password (called pepper) in my PepperBCryptPasswordEncoder.
+Pepper gives additional protection from password data analyze: you need source codes to reproduce encryption, not only DB data.
+
+Used Spring Security for cross site attack protection. For all POST request added security token.
+
+Tests has own property file, it will not use same DB as main program. It is better to allways use H2 in memory DB for testing.
+
+Created most important tests.
+Covered encryption, password strength and registering user logic(controller).
+Created integration test to test DAO, that loads Spring context.
+
+
+
+Possible additional improvements:
+- Create separate CSS file and header jsp to include in all files.
+- Improve html structure, add design.
+- Move logic from RegUserController register method to UserService.
+- Add logging.
+- Increase test coverage by creating simple tests.

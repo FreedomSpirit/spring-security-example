@@ -1,0 +1,9 @@
+Volkov Alexandr test task
+
+To run project run Maven command:
+mvn spring-boot:run
+
+After few seconds, web application will be available by link:
+http://localhost:8080/
+
+You can use test/test credentials or create new user.
